@@ -1,0 +1,65 @@
+<section class="form">
+    <form class="employeeform" [formGroup]= "service.form" #form="ngForm" (ngSubmit)="submit(form)">
+        <mat-grid-list cols="2" rowHeight="300px">
+           
+<mat-grid-tile>
+<div class="control-container">
+    <input type="hidden" formControlName= "$key">
+    <mat-form-field>
+        <mat-label>Employee Name</mat-label>
+        <input formControlName="employeeName" matInput placeholder="Enter employee name*">
+        <mat-error>Employee name is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Position</mat-label>
+        <input type="text" formControlName="position" placeholder="Enter Position" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input formControlName='email' matInput placeholder="Enter email id*">
+        <mat-error>email id is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>City</mat-label>
+        <input formControlName='city' matInput placeholder="Enter City Name*">
+        <mat-error>City name is mandatory.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Contact Number</mat-label>
+        <input formControlName='mobile' matInput placeholder="Enter Mobile Number*">
+        <mat-error *ngIf="service.form.controls['mobile'].errors?.required">Contact Number is required.</mat-error>
+        <mat-error *ngIf="service.form.controls['mobile'].errors?.minlength">Minimum 10 characters required.</mat-error>
+    </mat-form-field>
+    
+</div>
+</mat-grid-tile>
+<mat-grid-tile>
+    <section class="control-container grid-tile2">
+        <div class="bottom">
+            <mat-radio-group formControlName="gender">
+                <mat-radio-button value="0">Male</mat-radio-button>
+                <mat-radio-button value="1">Female</mat-radio-button>
+                <mat-radio-button value="2">Other</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+<mat-form-field>
+    <mat-label>Joining Date</mat-label>
+    <input formControlName="joining_date" matInput [matDatepicker]="picker" placeholder="Joining Date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>About:</mat-label>
+    <textarea matInput formControlName="about"></textarea>
+  </mat-form-field>
+
+<div class="form-button">
+    <button color="primary" mat-raised-button type="submit" [disabled]="!form.valid">Register</button>
+    <button mat-raised-button color="warn" (click) = "onClear()" type="clear">Clear</button>
+</div>
+    </section>
+</mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</section>
